@@ -14,7 +14,6 @@
 			response.sendRedirect("logincomplete.jsp?id="+id+"&pwd="+pwd);
 		} else if(id != null & !id.equals("faker") & !pwd.equals("1234")) {
 			out.print("faker는 아니지만 id는:"+id+"입니다<br/>비밀번호는:"+pwd+"입니다");
-			System.out.print(id);
 		} else {
 			out.print("입력된 아이디가 없습니다");
 		}
