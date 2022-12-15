@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+           ul {margin: 5px; border: 1px solid red;}/*테두리 바깥 여백. 요쇼와 요소사이의 여백*/
+           ul ul {border:1px dotted peachpuff;}
+           /*형제선택자: 기준요소(h2)뒤의 모든 형제요소에 스타일 적용*/
+           h2~p {font-size: 11px;}
+           /*인접형제선택자: h2형제중에서 가장 가까운 형제요소(p)에 스타일 적용*/
+           h2+p {color:red}
+        </style>
+    </head>
+    <body>
+        <h2>연결선택자</h2>
+        <p>하위선택자 -> 상위요소 공백 하위요소<br/>
+            지정한 모든 하위요소에 스타일 적용</p>
+        
+        <p>자식선택자 => 부모요소 > 자식요소<br/>
+            지정한 자식요소에 스타일 적용</p>
+        <hr/>
+        <p>인접형제 선택자(p425) => 동등한형제요소+동등한형제요소<br/>
+            형제중에서 가장 가까운 형제 요소에 스타일 적용</p>
+        <p>형제 선택자(p427) => 요소~요소<br/>
+            기준요소 뒤의 모든 형제요소에 스타일 적용</p>
+        <p>*펜션예약정보*</p>
+        <ul><!--바깥쪽 ul 시작-->
+            <li>예약방법</li>
+                <ul> <!--안쪽 ul 시작-->
+                    <li>전화예약</li>
+                    <li>카카오톡예약</li>
+                </ul> <!--안쪽 ul 끝-->
+            <li>요금</li>
+            <ul>
+                <li>2인실:50000원</li>
+                <li>4인실:100000원</li>
+                <li>10인실:200000원</li>
+                <li>20인실:350000원</li>
+            </ul>
+        </ul><!--바깥쪽 ul 끝-->
+    </body>
+</html>

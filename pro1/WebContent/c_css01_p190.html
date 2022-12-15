@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" >
+    <head>
+        <meta charset="utf-8">
+        <!--external 방식: html 문서 밖에서 별도의 css문서를 선언
+            보통 external 방식을 이용할때는 가장 먼저 선언해준다-->
+        <link rel="stylesheet" href="css/c_css01_p190.css">
+        <style>
+
+            /*internal 방식*/
+            * {margin: 10px;} /*margin:테두리밖여백 */
+            dt {background-color: aqua; border-radius: 5px;}
+            dd {background-color: blueviolet; border-radius: 5px;}
+
+            
+        </style>
+        <title>제목임</title>
+    </head>
+    <body>
+        <dl> <!--inline방식-->
+            <dt>css</dt>
+            <dd>casciding style sheet</dd>
+            <dt>cascading</dt>
+            <dd>선택자에 적용된 많은 스타일중에 어떤 스타일을 나타낼지를 결정함을</dd>
+
+        </dl>
+
+        <hr/>
+        <h4>스타일 우선 순위</h4>
+        <div>1. 사용자 스타일 시트가 최우선</div>
+        <div>2. !important가 붙은 스타일</div>
+        <div>3. 사용자 정의 일반스타일(제일 빈번)</div>
+        <div>4. 기본적인 브라우저 스타일 시트</div>
+
+        <hr/>
+        
+        <h2>CSS의 선언방식 3가지</h2>
+        <xmp>
+            
+                *internal방식:html문서안에 head요소, body요소에 에 style선언
+                    문법- <head>
+                            <style>
+                                선택자 {css:속성명:값;css:속성명:값;css:속성명:값;}
+                            </style>
+                          </head>
+                
+                *external방식:html 문서 밖에서 별도의 css를 선언
+                    문법-<head>
+                            <link rel = "stylesheet" href = "경로\파일명.css">
+                        </head>
+                *inline 방식: 특정 요소에 style 속성을 이용
+                    문법 - <태그명 style="css속성명:값"></태그명>
+                </li>
+        </xmp>
+    </body>
+</html>

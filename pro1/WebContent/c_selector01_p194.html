@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+    <html lang="ko">
+        <head>
+            <meta charset="utf-8">
+            <title>졸려....</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+            <style>
+                *{margin: 10px;}
+                #i1 {font:italic 900 40px/80px 'D2 Coding';}
+                .c1{color:pink; text-decoration: underline;}
+            </style>
+        </head>
+        <body>
+            <h4>텍스트스타일</h4>
+            <span class="c1">color 글자색</span>
+            <span class="c1">text-decoration: underline</span>
+            <span style="text-decoration:line-through ;">line-through</span>
+            <span style="text-decoration:overline ;">text-overline</span> <!--가장 빈번하게 쓰임-->
+            <span style="text-decoration: none;">none</span> <!--가장 빈번하게 쓰임-->
+            <hr/>
+            <h4>글꼴관련스타일</h4>
+            <div id="i1">font속성: 글꼴 관련 속성을 한꺼번에 묶어서 표현</div>
+            <div style="font-family: 'Brush Script MT','D2 Coding','맑은 고딕',궁서체;">font-family:글꼴</div>
+            <div style="font-size: 32px;">font size 글자 크기</div>
+            <div style="font-weight: 100;">font-weight 글자 굵기</div>
+            <div style="font-style: italic;">italic체 font-style</div>
+            <hr/>
+            <h2>선택자(selector)</h2>
+                <xmp>
+                    -태그명:html 문서내의 지정된 모든 태그를 선택하여 style 서식
+                    -#Id명: 지정한id명을 가진 요소에 적용하겠다는 의미, id명은 unique
+                    -.class명 : 지정한 class명을 가진 요소에 적용하겠다는 의미 class명은 동일->공통적인 서식
+                    -* : 전체선택자. 모든요소에 적용 -> 모든 하위 요소에 한꺼번에 style을 적용할때
+
+                </xmp>
+            <hr/>
+        </body>
+    </html>

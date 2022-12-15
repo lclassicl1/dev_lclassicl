@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>표오</title>
+        <meta charset="utf-8">
+        <!--internal 방식 : html 문서내 head 태그 내부에 style 선언-->
+        <style>
+            /*선택자 {속성:값;속성:값;속성:값}
+                selector {property:value;}*/
+            table,th,td {
+                    border-width: 3px;         
+                    border-style: solid;
+                    border-color: aqua;
+                    /*border-width : 선두께
+                    border-style: 선모양
+                    border-color: 선색상 */}
+            /*모든 table에 대해서 border-collapse:collapse: 1줄 <= 표 바깥쪽 테두리와 안쪽 cell의 테두리 통합
+                                  border-collapse:separate 기본: 2줄 표 바깥쪽 테두리와 안족 cell의 테두리 분리*/ 
+            table {border-collapse:collapse;}   
+            h2 {border-top:3px dashed peachpuff;
+                border-right: 3px dotted red;
+                border-bottom: 3px double green;
+                border-left: 5px solid purple;}
+            table th {background-color: aqua;}
+        </style>
+    </head>
+    <body>
+        <h2>표(table)P77</h2>
+        <!--css박스모델(p294)
+            padding: border와 content와의 여백
+            border : 테두리. 기본값은 0
+            margine : element와 element 사이의 여백
+            cellpadding : cell안의 content와의 여백
+            cellspacing : cell과 cell 사이의 여백-->
+        
+        <TABLE cellpadding="5" cellspacing="1" width="1200" align="center">
+            <!--caption의 위치 table 바로 아래-->
+            <caption>표제목</caption>
+            <thead>
+            <tr align="center">
+                <th>구분</th>
+                <th>학교수</th>
+                <th>학급수</th>
+                <th>학생수</th>
+                <th>교원수</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr align="center">
+                    <td>초등학교</td>
+                    <td>100</td>
+                    <td>200</td>
+                    <td>300</td>
+                    <td>400</td>
+                </tr>
+                <tr align="center">
+                    <td>중학교</td>
+                    <td>300</td>
+                    <td>400</td>
+                    <td>300</td>
+                    <td>400</td>
+                </tr>
+
+            </tbody>
+            <tfoot>
+                <tr align="center">
+                    <td>합계</td>
+                    <td>400</td>
+                    <td>600</td>
+                    <td>600</td>
+                    <td>800</td>
+                </tr>
+            </tfoot>           
+        </TABLE>
+    </body>
+</html>

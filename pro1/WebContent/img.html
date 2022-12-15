@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            .pic1 {width:100px; height: 120px;border: 1px dotted brown;
+                    border-radius: 15px;}
+            .pic2 {width: 200px; height: 200px; border: 1px dotted green;
+                    border-radius: 10px;}
+        </style>
+    </head>
+    <body>
+        <h2>이매쥐~~~~~~~~~~~~~~~~~~(p94)<hr/>
+            *상대경로 <img src = "images/giphy.gif" class="pic1">
+                      <img src = "../cloud.jpg"/ class="pic1"><p/>
+            *절대경로 <img src = "C:\vsWK\images\orrn.jpg" alt="오른" title="오오오오른"
+                        width="20%"
+                        height="20%" class="pic1"> <!--이미지가 깨졌을때 alt로 문구를 보여줌. title은 마우스오버하면 보여줌--> 
+                      <img src = "c:\cloud.jpg"/ class="pic1">
+            <br/><br/><br/>
+            <hr/>
+            <figure>
+                
+                    <img src="images/jjal.gif" class="pic2" title="정형돈"/>
+                    <img src="images/jjal2.gif" class="pic2" title="박명수"/>
+                    <img src="images/doom.gif" class="pic2" title="존나좋군"/>
+                    <figcaption>움짤움짤</figcaption>
+            </figure>
+            <hr/>
+
+            <pre>
+                --절대경로: absolute URL : 전체경로 (full web address)
+                --상대경로: relative URL : 부분경로 (기준파일&다른파일)
+                --문법 : img src="필수속성 경로 및 파일명" img는 닫는태그가 없음
+
+            </pre>
+            
+        </h2>
+
+    </body>
+</html>

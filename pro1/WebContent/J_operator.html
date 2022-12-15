@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+		<h1>연산자(Operator)</h1>
+		<hr/>
+		<pre>
+			비교연산자
+			a==b A는 B와 일치한지.
+			a===b a는 b와 정말로 일치한지.
+			a!=b a는 b와 같지않다
+		</pre><hr/>
+		<script>
+			document.write("<pre>");
+			let a = 100;
+			let b = 100;
+			let a1 = "100"; //자바스크립트에서는 데이터타입의 정의가 없는대신 ""로 문자열을 취급해준다
+			document.writeln("a="+a+","+"b="+b+","+"a1="+a1);
+			document.writeln("a>b="+(a>b));
+			document.writeln("a==b의 결과="+(a==b));
+			document.writeln("a==a1의 결과="+(a==a1)); //값만 비교
+			document.writeln("a===b의 결과="+(a===b)); //값과 타입 둘다 비교
+			document.writeln("a===a1의 결과="+(a===a1));
+			document.writeln("a!=b의 결과="+(a!=b));
+			document.writeln("a!==b의 결과="+(a!==b));
+			
+			
+			document.write("</pre>");
+		</script>
+    </body>
+</html>

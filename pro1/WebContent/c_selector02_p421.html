@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            div li {border:1px dotted blue;}
+        </style>
+    </head>
+    <body>
+        <h2>연결선택자</h2>
+        <br>하위선택자 -> 상위요소 공백 하위요소<br/>
+            지정한 모든 하위요소에 스타일 적용
+        </p>
+        <p>자식선택자 => 부모요소 > 자식요소<br/>
+            지정한 자식요소에 스타일 적용</p>
+        <hr/>
+        <p>*펜션예약정보*</p>
+        <ul><!--바깥쪽 ul 시작-->
+            <li>예약방법</li>
+            <div>
+                <ul> <!--안쪽 ul 시작-->
+                    <li>전화예약</li>
+                    <li>카카오톡예약</li>
+                </ul> <!--안쪽 ul 끝-->
+            </div>
+            
+            <li>요금</li>
+            <ul>
+                <li>2인실:50000원</li>
+                <li>4인실:100000원</li>
+                <li>10인실:200000원</li>
+                <li>20인실:350000원</li>
+            </ul>
+        </ul><!--바깥쪽 ul 끝-->
+    </body>
+</html>

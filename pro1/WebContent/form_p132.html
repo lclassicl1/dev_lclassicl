@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> -->
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h2>***form(p132)태그</h2>
+        <hr/>
+        <!--action = 요청을 처리할 서버측 문서 method = "post | get" get방식:입력한 내용이 주소표시줄에 노출, post방식: 주소표시줄에 노출X, 중요한데이터넘길때 이용-->
+        <form action="ok.html" target="_blank" method="get">
+        <fieldset>
+        <legend>개인정보</legend>
+        <ul>
+        		<!-- required - 필수입력 / autofocus - 자동으로포커스위치 / placeholder 예시멘트 출력-->
+        	<li>이름:<input type="text" title="이름" name="userName" id="userName" size="10" required="required" autofocus="autofocus"/ placeholder="이름"></li>
+        	<li>별명:<input type="text" title="별명" name="nickName" id="nickName" value="별명" size="20"/></li>
+        	<li>비번:<input type="password" title="비번" name="pw" id="pw"/></li>
+        	<li>e-mail:<input type="email" title="이메일" name="email" id="email"/></li>
+        	<li>sms수신여부(y/n):<input type="radio" name="sms" id="smsY" value="Y" checked="checked"/><label for="smsY">yes</label>
+        						<input type="radio" name="sms" id="smsN" value="N"/><label for="smsN">no</label></li>
+        	<li>
+        		취미:
+        		게임<input type="checkbox" name="hobby" id="h0" value="game"/ checked="checked">
+        		운동<input type="checkbox" name="hobby" id="h1" value="play"/>
+        		코딩<input type="checkbox" name="hobby" id="h2" value="coding"/>
+        		공부<input type="checkbox" name="hobby" id="h3" value="study"/>
+        		잠<input type="checkbox" name="hobby" id="h4" value="sleep"/>
+        	</li>
+        	<li>
+        		<!-- 단일 및 다중선택 가능 
+        			다중선택시 mutiple 속성 추가-->
+        		<select name="loc" id="loc" size="10" multiple="multiple">
+        			<option value="newyork">뉴욕</option>
+        			<option value="mai">마이애미</option>
+        			<option value="busan">부산</option>
+        			<option value="seoul">서울</option>
+        		</select>
+        	</li>
+        	<li>파일찾기:<input type="file" name="imgFile" id="imgFile"/></li>
+        	<li>hidden<input type="hidden" name="memberNo" id="memberNo"/></li>
+        	<li>비고:<textarea name="etc" id="etc" rows="10" cols="100"></textarea></li>
+        	<li>site:<input type="url" title="주소" name="siteURL" id="siteURL"/></li>
+        	<li>tel:<input type="tel" title="번호" name="tel" id="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder="010-ABCD-1234"/></li> <!-- html5에서 추가된 기능 -->
+        </ul>
+        </fieldset>
+        	<input type="image" src="./images/icon.png"/ onclick="alert('사진인데?')" width="50" height="50">
+        	<input type="submit" value="확인"/>
+        	<input type="reset" value="취소"/>
+        	<input type="button" value="버튼" onclick="alert('중꺾마');"/>
+        	<br/><br/>
+        	<button type="submit">서브밋</button>
+        	<button type="submit" style="border-style:none;"><img src="./images/icon.png" width="50" height="50"></button>
+            <!--<input type="text" title="이름" name="parameter명" value="초기값"/>-->
+        <fieldset>
+       	<legend>주문정보</legend>
+  		<ul>
+  			<li>상품검색:<input type="search" name="proSearch" id="proSearch"/></li>
+  			<li>주문수량:<input type="number" name="ordercnt" id="ordercnt" value="1" min="0" max="10" step="2"/></li>
+  			<li>range:<input type="range" name="range" id="range"/></li>
+  				<input type="submit" value="확인"/>
+  			<li>color:<input type="color" name="proColor" id="proColor"/></li>
+  			<li>
+  				date:<input type="date" name="orderDate" id="orderDate"><br/>
+  				month:<input type="month" name="orderMonth" id="orderMonth"><br/>
+  				week:<input type="week" name="orderWeek" id="orderWeek"><br/>
+  				datetime_local:<input type="datetime-local" name="dtLocal" id="dtLocal"><br/>
+  				datetime:<input type="datetime" name="dt" id="dt"><br/>
+  			</li>
+  			<li>진행상태 progress:<progress name="del" id="del" value="0.95" max="1"></progress>
+  			
+  			<li>값이 차지하는 크기표시(점유율)<br/>점유율:<meter value="" name="m1" id="m1" value="0.8" max="1"></meter><br/>
+  			사용량:<meter value="" name="m2" id="m2" value="55" max="100"></meter>
+  			트래픽초과:<meter name="m3" id="m3" value="88" low="" high="85" min="0" max="100"></meter>
+  			트래픽초과:<meter name="m4" id="m4" value="50" optimum="50" min="0" max="100"></meter>
+  			</li>
+  		</ul>
+  		</fieldset>
+            
+        </form>
+        <br/>
+        <iframe width="1500" height="600" src="https://manatoki166.net/"></iframe>
+    </body>
+</html>
