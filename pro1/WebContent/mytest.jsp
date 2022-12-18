@@ -9,9 +9,11 @@
 	<script></script>
 </head>
 <body>
-	<h1>document.write테스트</h1>
+	<h1>innerText, innerHTML Test</h1>
+	<p id="test">P태그의 Project입니다.</p>
 	<script>
-		document.write("나는 매우 피곤합니다");
+		document.getElementById("test").innerText = "<strong><em>P태그는<br/>나가있어</em></strong>";
+		
 	</script>
 </body>
 </html>
