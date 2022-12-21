@@ -22,7 +22,18 @@
 			<strong>Username</strong><br/><input type="text" name="user_id" id="user_id" class="textbox" required="required" placeholder="Enter Username"><br/>
 			<strong>Password</strong><br/><input type="password" name="user_pw" id="user_pw" class="textbox" required="required" placeholder="Enter Password">	<br/>
 			<input type="submit" value="Login" id="submit"><br/>
-			<input type="reset" value="Cancel" id="cancel">Forgot&nbsp;<a href="">Password?</a>
+			<script>
+				function testcon() {
+					let result = confirm('비밀번호 찾기 하실껀가요?');
+					if(result == true) {
+						response.sendRedirect('changpwd.jsp');
+					} else {
+						
+					}
+				}
+			</script>
+				<div id="cancel"><input type="reset" value="Cancel" id="cancel"> </div>Forgot&nbsp;<a href="changepwd.jsp" onclick="testcon()" target="_blank">Password?</a>
+			
 		</form>
 	</div>		
 	
