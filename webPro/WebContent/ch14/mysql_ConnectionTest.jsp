@@ -52,7 +52,6 @@
 			e.printStackTrace();
 		}
 		out.print("close");
-
 	%>
 </body>
 </html>

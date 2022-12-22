@@ -37,6 +37,10 @@
 			}
 		}
 		
+		function closeWin(){
+			//window.open()은 현재창이 닫힌다. window.open을 변수에 넣어놨으니 해당 변수를 닫아주면 새창이 닫힌다.
+			newWindow.close()
+		}		
 		/* function movesizeBydown() { //아래
 			
 		}
@@ -53,6 +57,7 @@
 		<button type="button" onmouseover="resizeWin();">window.resizeTo()</button>
 		<button type="button" onmouseover="bysizeWin();">window.resizeBy()</button>
 		<button type="button" onclick="openWin();">openWin();</button>
+		<button type="button" onclick="closeWin();">closeWin()</button>
 		<hr/>
 		<button type="button" onmouseover="movesizeTo();">moveTo();</button>
 		<button type="button" onmouseover="movesize(this);" id="up">위</button>
