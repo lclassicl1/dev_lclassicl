@@ -28,7 +28,7 @@
 				<th colspan="2">
 					<input type="submit" value="입력"/>
 					<input type="reset" value="취소"/>
-					<button type="button" onclick="window.open('deptList_1222.jsp')">전체조회하러가기</button>
+					<button type="button" onclick="window.open('deptList_1222.jsp')">전체조회</button>
 				</th>			
 			</tr>
 		</fieldset>

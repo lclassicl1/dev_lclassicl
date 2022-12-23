@@ -63,9 +63,12 @@
 				%> 
 				<script>
 				alert(<%=result%>+'건입력완료');
-				location.href="deptList_1222.jsp";
-				</script>
+				/* 페이지 이동방법1 location.href */
+				//location.href="deptList_1222.jsp";
 				
+				/* 페이지 이동방법2 <jsp:forward> */
+				</script>
+				<%-- <jsp:forward page="deptList_1222.jsp"><jsp:param value="1" name="1"/></jsp:forward> --%>
 				
 				<%}
 			} catch(Exception e) {
