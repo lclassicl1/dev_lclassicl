@@ -15,7 +15,7 @@
 		frmTest.action = 'j_childWindow_1222.jsp';
 		frmTest.submit(); */
 		function openwindow(){
-			win = window.open('j_childWindow_1222.jsp','nw','width=20','height=20');
+			win = window.open('j_childWindow_1222.jsp','nw','width=500,height=500,toolbar=yes, menubar=yes');
 		}
 		
 		function childclose(){

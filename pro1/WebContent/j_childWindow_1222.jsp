@@ -17,7 +17,7 @@
 			let result = obj.substr(0,indexNum); //주소1
 			let result2 = obj.substr(indexNum+1); //주소2
 			//alert(result2.indexOf(' '));
-			let adr2 = result2.substr(0,(result2.indexOf(' ')));
+			let adr2 = result2.substr(0 ,(result2.indexOf(' ')));
 			let zipindex = obj.indexOf('-'); // -의 인덱스번호
 		
 			let zip1 = obj.slice(zipindex-3,zipindex);
@@ -43,6 +43,10 @@
 			opener.document.querySelector('#zipcode2').value = zip2;
 		}
 		
+		function clo() {
+			window.close();
+		}
+		
 		
 	</script>
 </head>
@@ -55,12 +59,13 @@
 	<p id="text"></p>
 	<form name="zipcodeFrm" id="zipcodeFrm">
 		<!-- ★this는 이벤트가 발생한 객체를 가리킨다. 객체 안에는 속성들도 포함하고 있다 -->
-		<input type="button" id="btn1" value="서울시 강남구 역삼동 100번지 123-123" onclick="findzip(this.value);"/>
+		<input type="button" id="btn1" value="서울시 강남구 역삼동 100번지 123-123" onclick="javascript:findzip(this.value);clo();"/> <!-- onclick에 function 2개넣기 -->
 		<input type="button" id="btn2" value="서울시 송파구 잠실동 100번지 456-789" onclick="findzip(this.value);"/>
 		<input type="button" id="btn3" value="전북 전주시 무슨읍 무슨면 123번지 777-888" onclick="findzip(this.value);"/>
 		<input type="button" id="btn4" value="부산시 무슨구 무슨구 어떤동 155번지 888-999" onclick="findzip(this.value);"/>
 		<input type="button" id="btn4" value="강원도 무슨무슨구 무슨무슨리 무슨무슨무슨읍 155번지 888-999" onclick="findzip(this.value);"/>
 		<input type="button" id="btn4" value="서울시 관악구 조원로22길25 155번지 888-999" onclick="findzip(this.value);"/>
+		<input type="button" id="btn4" value="출력" onclick="print()"/>
 	</form>
 	<button type="button" onclick="self.close();">자기자신 닫기</button>	<!-- 자기자신닫기 self.close();-->
 	<button type="button" onclick="opener.close();">부모창 닫기</button> <!-- 부모창 닫기 opner.close(); -->
