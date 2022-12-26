@@ -9,4 +9,22 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!--xml 주석문 -->
+  <!--  교재 409page 서버올라갈때 웹어플리케이션에 대한 정보를 읽어들이게 된다
+  		따라서 해당 어플리케이션에 대한 각종 환경을 설정할때 이 문서에 작성하면된다
+  		web.xml문서는 web 어플리케이션에 대한 환경설정-->
+  <!-- <servlet>
+  	<servlet-name>	mysqlDriverLoader</servlet-name>
+  	<servlet-class>jdbc.MySQLDriverLoader</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet> -->
+  
+  <!-- Connection pool 초기화 서블릿 설정 아래코드를 추가하면 웹어플리케이션이 실행될떄 DECPInit 서블릿 클래스가 1번 자동으로 실행된다 
+  		그 안에 init메소드가 실행된다-->
+  <servlet>
+  	<servlet-name>	DBCPInit</servlet-name>
+  	<servlet-class>jdbc.DBCPInit</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
 </web-app>
