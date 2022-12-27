@@ -27,4 +27,14 @@
   	<servlet-class>jdbc.DBCPInit</servlet-class>
   	<load-on-startup>1</load-on-startup>
   </servlet>
+  
+  <!-- servlet을 web.xml로 맵핑하기 p499~501-->
+  <servlet>
+  	<servlet-name>	Myservlet1</servlet-name>
+  	<servlet-class>ch17.MyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	<servlet-name>Myservlet1</servlet-name> <!-- 연결하고자 하는 servlet name 이름 꼭 일치해야한다.-->
+	<url-pattern>/ms1</url-pattern> <!-- URL의 패턴 -->
+  </servlet-mapping>
 </web-app>
