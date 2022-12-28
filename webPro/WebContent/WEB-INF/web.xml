@@ -22,6 +22,19 @@
   
   <!-- Connection pool 초기화 서블릿 설정 아래코드를 추가하면 웹어플리케이션이 실행될떄 DECPInit 서블릿 클래스가 1번 자동으로 실행된다 
   		그 안에 init메소드가 실행된다-->
+  		
+  <!-- <error-page>
+  	<error-code>에러코드</error-code>
+	<location>에러코드 발생시 보여줄 커스텀 페이지</location>  	
+  </error-page> -->
+  
+  <!-- 개발 단계에선 미적용하는게 좋다
+  <error-page>
+  <error-code>404</error-code>
+	<location>/error/errorpage404.jsp</location>  	
+  </error-page> -->
+  
+  
   <servlet>
   	<servlet-name>	DBCPInit</servlet-name>
   	<servlet-class>jdbc.DBCPInit</servlet-class>
