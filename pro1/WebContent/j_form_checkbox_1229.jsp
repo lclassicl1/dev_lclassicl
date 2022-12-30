@@ -84,9 +84,6 @@
 			//각 체크박스의 체크상태 -> 전체선택 체크박스의 체크상태와 동일하게 적용
 				currentElement.checked = obj.checked;
 		});
-
-
-		
 		 
 	 }
 	 
