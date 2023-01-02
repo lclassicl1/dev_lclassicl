@@ -100,15 +100,9 @@
 				obj.tel.focus();
 				return false;
 			} else if(phone != "") {
-				//alert(phone.indexOf('-'));
-				//alert(phone.replace('-',""));
 				let phonenumber = phone.replaceAll('-',"");
 				alert(phonenumber);
 			}
-			
-			
-			
-			
 			
 			return true;
 		}
