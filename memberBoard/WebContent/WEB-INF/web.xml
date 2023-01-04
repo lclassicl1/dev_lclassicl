@@ -40,4 +40,23 @@
   	poolName=board
   	</param-value>
   </context-param>
+  
+  <!-- servlet mvc controller code p588 -->
+  <!-- .do로 요청이 들어오면 controllerUsingURI 이름의 서블릿을 수행. 실제 동작하는 클래스는 mvc.controller.ControllerUsingURI 자바 클래스--> 
+  <servlet>
+  	<!-- 정확하게 이름과 java file 경로를 지정해줘야한다 -->
+  	<servlet-name>ControllerUsingURI</servlet-name>
+  	<!-- 이부분이 실제 존재하는 클래스의 경로 패키지명.클래스명 -->
+  	<servlet-class>mvc.controller.ControllerUsingURI</servlet-class>
+  	<init-param>
+		<param-name>configFile</param-name> <!-- 파라미터 이름 -->
+		<param-value>/WEB-INF/commandHandlerURI.properties</param-value> <!-- 파라미터의 값에 넣어줄 경로 -->  	
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ControllerUsingURI</servlet-name>
+  	<url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

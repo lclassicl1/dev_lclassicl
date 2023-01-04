@@ -31,7 +31,7 @@ public class ControllerUsingURI extends HttpServlet {
 		// web.xml문서 설정부분에서   /WEB-INF/commandHandlerURI.properties를 가져와
 		// String타입  configFile변수에 저장
         String configFile = getInitParameter("configFile");
-        Properties prop = new Properties();//Properties객체
+        Properties prop = new Properties();//Properties객체 key도 string value도 string
         String configFilePath = getServletContext().getRealPath(configFile);
         
         //실행동작할 수 있는 파일로 만든다
@@ -48,6 +48,8 @@ public class ControllerUsingURI extends HttpServlet {
                 Class<?> handlerClass = Class.forName(handlerClassName);
                 CommandHandler handlerInstance = 
                         (CommandHandler) handlerClass.newInstance();
+                
+                //map 참조변수명.put(key,value)를 집어넣는다
                 commandHandlerMap.put(command, handlerInstance);
             } catch (ClassNotFoundException | InstantiationException 
             		| IllegalAccessException e) {
