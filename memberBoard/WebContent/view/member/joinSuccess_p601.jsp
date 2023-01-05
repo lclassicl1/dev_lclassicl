@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>님 회원가입 ㅊㅋㅊㅋ</h1>
+	<p>joinSuccess.jsp(p601)</p>
 </body>
 </html>

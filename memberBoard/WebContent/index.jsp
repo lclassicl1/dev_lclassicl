@@ -19,9 +19,9 @@
 		http://localhost:8088/mBoard
 	</pre>
 	<ul>
-		<li><a href="registerForm.do">회원가입(폼)</a></li>
+		<li><a href="<%=request.getContextPath()%>/registerForm.do">회원가입(폼)</a></li>
+		<li><a href="http://localhost/mBoard/registerForm.do">회원가입(폼)</a></li>
 		
-		<li>회원가입</li>
 	</ul>
 </body>
 </html>

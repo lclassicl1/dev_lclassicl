@@ -6,42 +6,60 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.tomcat.jdbc.pool.JdbcInterceptor;
+
+import jdbc.DBCPInitListener;
+import jdbc.JdbcUtil;
+import jdbc.conn.ConnectionProvider;
+
 //DAO(Data Access Object): DB연동하여 쿼리관련 실행기능이 있는 클래스
 //이 클래스는 DAO로써 주로 회원관련 DB 작업을 실행
 public class MyMemberDAO {
-	//db와 연동하기위한 DB계정 아이디 비번 URL
-	String url = "jdbc:mysql://localhost:3306/board?useUnicode=true&characterEncoding=utf8";
-	String id = "gangnam";
-	String pwd = "asdf111";
+
 	StringBuffer sql = new StringBuffer();
-	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
 	int result;
 	
-	public int idDuplicate(String getId) {
+	public int idDuplicate(String getId, Connection conn) {
 		System.out.println("MemberDAO 진입 성공");
 		System.out.println("MemberDAO까지 잘들고왔나요 Id:"+getId);
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url, id, pwd); //URL과 ID, PWD를 이용하여 커넥션 객체를 얻는다.
+			//1.DriverLoad - web.xml & jdbc.DBCPInitListner로 처리
 			
-			sql.append("select * from member "); 
-			sql.append("where memberid = ?");
+			//2.Connection 얻기 - 여기에서는 Service로부터 Connection 객체를 전달받기, DAO 에서 직접 받을수도있다.
+				//Service 클래스에서 conn으로 Connection 객체를 넘겨받았다.
+			//3.객체준비 
+				sql.append("select memberno,memberid,memberpwd,email");
+				sql.append(" from member"); 
+				sql.append(" where memberid = ?");
+				
+				psmt = conn.prepareStatement(sql.toString());
+			//4.쿼리실행
+				psmt.setString(1, getId);
+				rs = psmt.executeQuery();
+				rs.last();
+				result = rs.getRow();
+				System.out.println("검색된 row:"+result);
+				//System.out.println("connection 얻기 성공");
+			//5. 자원반납 -> jdbc.JdbcUtil클래스의 메소드들을 이용하여 처리해줌
 			
-			psmt = conn.prepareStatement(sql.toString());
-			psmt.setString(1, getId);
-			rs = psmt.executeQuery();
-			rs.last();
-			result = rs.getRow();
-			System.out.println("검색된 row:"+result);
-			//System.out.println("connection 얻기 성공");
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			//System.out.println("connection 얻기 실패");
 			e.printStackTrace();
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(psmt);
 		}
-		
+		 
 		return result; //select 쿼리문 날린후에 row가1이면 id가있는것이고, 0이면 중복되는값이없는것
 		
 	}
+	
+	/* insert
+	 * public int insertMember(String getId, String getPwd, String getName, String
+	 * getEmail) {
+	 * 
+	 * return 0; }
+	 */
 }
