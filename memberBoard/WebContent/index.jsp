@@ -20,7 +20,7 @@
 	</pre>
 	<ul>
 		<li><a href="<%=request.getContextPath()%>/registerForm.do">회원가입(폼)</a></li>
-		<li><a href="http://localhost/mBoard/registerForm.do">회원가입(폼)</a></li>
+		<li><a href="http://localhost/mBoard/join.do">회원가입(폼)</a></li>
 		
 	</ul>
 </body>

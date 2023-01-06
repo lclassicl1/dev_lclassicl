@@ -174,7 +174,7 @@
 </head>
 <body>
 	 <!-- onsubmit은 submit 버튼을 눌렀을때만 수행된다 여기서 this는 submit 이 아닌 이벤트가 발생하는 form을 의미 -->
-	<form action="/join.do" name="memberFRM" id="memberFRM" method="get"> <!-- return을 부여하면서 함수가 false를 리턴하면 넘기지않는다 -->
+	<form action="<%=request.getContextPath()%>/join.do" name="memberFRM" id="memberFRM" method="post"> <!-- return을 부여하면서 함수가 false를 리턴하면 넘기지않는다 -->
 		<table>
 			<caption>회원가입</caption>
 			<tbody>
