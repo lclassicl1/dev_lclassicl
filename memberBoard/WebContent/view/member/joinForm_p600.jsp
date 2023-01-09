@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,6 +31,10 @@
 		background-color: aqua;
 	}
 	
+	.error1 {
+		color: red;
+	}
+	
 	</style>
 	<script>
 		$(function(){
@@ -45,13 +50,13 @@
 				}  */
 				
 				/* return true; */
-				
-			});
 			//email 선택부분 jquery로 변환
 			$('#email_dd').change(function(op){
 				//alert($('select[id=email_dd] option:selected').val());
 				let text = $('select[id=email_dd] option:selected').val();
 				$('#email_d').val(text);
+			});
+				
 			});
 			
 			let openwindow;
@@ -180,30 +185,35 @@
 			<tbody>
 				<tr>
 					<th class='c1'>아이디</th>
-					<td><input type="text" name="memberid" id="mid"/></td>
+					<td><input type="text" name="memberid" id="mid"/>
+						<!-- joinhandler에서 넘긴 map값을 검증, 아이디 중복일시 errors keyname error 코드 duplicateID가 있고 
+						 value는 true가  넘어온다 -->
+						 <span class="error1"><c:if test="${errors.memberid}">아이디를 입력해주세요</c:if>
+						<c:if test="${errors.duplicateId}">이미 사용중인 아이디입니다.</c:if></span>
+					</td>
 				<tr/>
 				<tr>	
 					<th class='c1'>비밀번호</th>
 					<td><input type="password" name="memberpwd" id="mpwd"/>
-					
+						<span class="error1"><c:if test="${errors.memberpwd}">비밀번호 입력해주세요</c:if></span>
 					</td>
 				</tr>
 				<tr>	
 					<th class='c1'>비밀번호확인</th>
 					<td><input type="password" name="re_memberpwd" id="re_mpwd"/>
-					
+						<span class="error1"><c:if test="${errors.re_memberpwd}">비밀번호 확인 입력해주세요.</c:if>
+						<c:if test="${errors.notMach}">일치하지않습니다.</c:if></span>
 					</td>
 				<tr/>
 				<tr>
 					<th class='c1'>이름</th>
 					<td><input type="text" name="membername" id="mname"/>
-					
-					
+						<span class="error1"><c:if test="${errors.membername}">이름을 입력해주세요</c:if></span>
 					</td>
 				</tr>
 				<tr>
 					<th class='c1'>이메일</th>	
-					<td><input type="text" name="email_id" id="email_id" size="12">@<input type="text" name="email_d" id="email_d" size="10"/>
+					<td><input type="text" name="email_id" id="email_id" size="12" required="required">@<input type="text" name="email_d" id="email_d" size="10" required="required"/>
 							<select name="email_dd" id="email_dd">
 								<option value="">직접입력</option>
 								<option value="daum.net">daum.net</option>

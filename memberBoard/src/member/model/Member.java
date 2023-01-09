@@ -18,6 +18,15 @@ public class Member {
     	
     }
     
+    public Member(String memberid, String membername, String memberpwd, String email, Date regdate, int grade) {
+		this.memberid = memberid;
+		this.membername = membername;
+		this.memberpwd = memberpwd;
+		this.email = email;
+		this.regdate = regdate;
+		this.grade = grade;
+	}
+    
     
     public Member(int memberno, String memberid, String membername, String memberpwd, String email, Date regdate, int grade) {
     	this.memberno = memberno;

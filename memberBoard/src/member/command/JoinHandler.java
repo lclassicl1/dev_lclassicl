@@ -1,8 +1,12 @@
 package member.command;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.service.DuplicateIdException;
 import member.service.JoinRequest;
 import member.service.JoinService;
 import mvc.command.CommandHandler;
@@ -50,21 +54,42 @@ public class JoinHandler implements CommandHandler {
 		String membername = request.getParameter("membername");
 		String email_id = request.getParameter("email_id");
 		String email_domain= request.getParameter("email_d");
+		String email = email_id + "@" + email_domain;
 		
 		JoinService joinService = new JoinService(); //서비스 객체 생성
 		JoinRequest joinRequest = new JoinRequest(); //Joinrequest 객체 생성
 		
 		joinRequest.setMemberid(memberid);
-//		joinRequest.setMemberpwd(memberpwd);
-//		joinRequest.setRe_memberpwd(re_memberpwd);
-//		joinRequest.setMembername(membername);
-//		joinRequest.setEmail_id(email_id);
-//		joinRequest.setEmail_domain(email_domain);
+		joinRequest.setMemberpwd(memberpwd);
+		joinRequest.setRe_memberpwd(re_memberpwd);
+		joinRequest.setMembername(membername);
+		joinRequest.setEmail(email);
 		
-		System.out.println("입력받은ID:"+joinRequest.getMemberid());
-		joinService.join(joinRequest);
 		
-		return FORM_VIEW;
+		//유효성 검사
+		Map<String, Boolean> errors = new HashMap<>();
+		request.setAttribute("errors", errors);
+		
+		
+		//필수입력 체크 관련 error가 있다면
+		joinRequest.validate(errors);
+		
+		//joinRequest에서 valiedate 메서드를 실행한후 errors에 뭔가 담겨있다면 오류가 있는것
+		//errors가 empty가 아니라면 formview를 다시 보여준다.
+		if(!errors.isEmpty()) {
+			return FORM_VIEW;
+		}
+		
+		try {
+			joinService.join(joinRequest);
+			System.out.println("join입력받은ID:"+joinRequest.getMemberid());
+			return "view/member/joinSuccess_p601.jsp";
+		} catch(DuplicateIdException e) {
+			e.printStackTrace();
+			errors.put("duplicateId", Boolean.TRUE);
+			return FORM_VIEW;
+		}
+		
 	}
 
 	private String processForm(HttpServletRequest request, HttpServletResponse response) {

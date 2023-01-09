@@ -2,6 +2,7 @@ package member.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 
 import jdbc.JdbcUtil;
 import jdbc.conn.ConnectionProvider;
@@ -28,15 +29,23 @@ public class JoinService {
 			
 			
 			Member member = memberDAO.selectById(conn, joinReq.getMemberid()); //id의 값을 가져옴
-			if(member != null) {
+			
+			if(member != null) { //아이디가 존재하면 중복되는 id이므로 rollback을 실행해주고 throw 처리
 				JdbcUtil.rollback(conn);
+				throw new DuplicateIdException();
 			}
 			
 			
 			//insert 기능이 있는 DAO 호출
+			//회원등급은 기본1로 가정하고 구현하지만 추가작업 필요
+			//회원번호는 increament 설정으로 자동증가하므로 회원번호는 제외하고 데이터값을 입력,
 			memberDAO.insert(conn, new Member(
-					
-					));
+											 joinReq.getMemberid(), 
+											 joinReq.getMembername(),
+											 joinReq.getMemberpwd(),
+											 joinReq.getEmail(),
+											 new Date(),
+											 1));
 			
 			conn.commit();
 		} catch (SQLException e) {

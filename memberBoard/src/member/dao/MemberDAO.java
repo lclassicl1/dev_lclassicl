@@ -12,13 +12,14 @@ import jdbc.JdbcUtil;
 import member.model.Member;
 
 public class MemberDAO {
-	StringBuffer sql = new StringBuffer();
+	
 	PreparedStatement psmt;
 	ResultSet rs;
 	
 	//parameter memberid = 유저가 입력한 id값, conn은 ConnectionProvider에서 connection 객체를 Service에서 넘겨받음
 	public Member selectById(Connection conn, String memberid) {
 		System.out.println("MemberDAO 진입() 넘겨받은 아이디"+memberid);
+		StringBuffer sql = new StringBuffer();
 		sql.append("select memberno, memberid, membername, memberpwd, email, regdate, grade");
 		sql.append(" from member");
 		sql.append(" where memberid = ?");
@@ -66,7 +67,28 @@ public class MemberDAO {
 	
 	//service 클래스에서 호출되는 insert 메소드 member의 정보를 전달받아 insert를 실행하는 메소드
 	public void insert(Connection conn, Member member) {
+		System.out.println("insert 하러왔습니다.");
+		StringBuffer sql = new StringBuffer();
+		int result = 0;
+		sql.append("insert into member(memberid, memberpwd, membername, email, regdate, grade)"); 
+		sql.append(" values(?,?,?,?,?,?)");
 		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, member.getMemberId());
+			psmt.setString(2, member.getMemberPwd());
+			psmt.setString(3, member.getMemberName());
+			psmt.setString(4, member.getEmail());
+			//new timestamp(long타입 변수)를 이용하여 timestamp 객체 생성
+			//member.getRegdate()의 .getTime()을 이용하면 long타입으로 반환해준다
+			psmt.setTimestamp(5, new Timestamp(member.getRegdate().getTime()));
+			psmt.setInt(6, member.getGrade());
+			
+			result = psmt.executeUpdate();
+			System.out.println(result+"개 insert완료");
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
