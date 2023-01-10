@@ -1,5 +1,6 @@
 package auth.command;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,10 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import auth.service.LoginFailException;
+import auth.service.LoginService;
+import auth.service.User;
 import mvc.command.CommandHandler;
 
 public class LoginHandler implements CommandHandler {
 	private final static  String LOGIN_VIEW = "view/loginForm.jsp"; 
+	private LoginService loginService = new LoginService();
+	
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("LoginHandler 진입");
@@ -65,16 +71,22 @@ public class LoginHandler implements CommandHandler {
 		}
 		
 		try {
-			
-			
+			//모델화 하는법 2가지
+			//request.setAttribute("속성값", Object value);
+			//session.setAttribute("속성값", Object value);
+			User user = loginService.login(memberid, memberpwd);
+			request.getSession().setAttribute("authUser", user);
+			try {
+				response.sendRedirect(request.getContextPath()+"/loginindex.jsp");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
 		} catch(LoginFailException e) {
 			errors.put("notMach", Boolean.TRUE);
 			return LOGIN_VIEW;
 		}
 		
-		
-		
-		return LOGIN_VIEW;
 		
 	}
 	

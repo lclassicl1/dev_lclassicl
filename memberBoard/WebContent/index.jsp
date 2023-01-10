@@ -9,6 +9,9 @@
 <body>
 	<h1>index</h1>
 	<pre>
+		
+	
+	
 		프로토콜://ip주소:포트번호/컨텍스트패스/파일명
 		http://localhost:8088/mBoard/index.jsp
 		welcome 파일 정상적으로 접속되는지 확인할때는

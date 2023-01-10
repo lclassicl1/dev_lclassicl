@@ -71,6 +71,13 @@ public class Member {
     public boolean matchPassword(String pwd) {
     	return memberpwd.equals(pwd);
     }
+    
+    //비밀번호 변경
+    
+    public String changePassword(String new_memberpwd) {
+    	this.memberpwd = new_memberpwd;
+    	return memberpwd;
+    }
 
 
 	@Override

@@ -91,6 +91,27 @@ public class MemberDAO {
 		}
 	}
 	
+	public void update(Connection conn, Member member) {
+		System.out.println("update 하러 왔습니다");
+		StringBuffer sql = new StringBuffer();
+		sql.append("update member"); 
+		sql.append(" set memberpwd = ?, membername=?, email=?, grade=?"); 
+		sql.append(" where memberid = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, member.getMemberPwd());
+			psmt.setString(2, member.getMemberName());
+			psmt.setString(3, member.getEmail());
+			psmt.setInt(4, member.getGrade());
+			psmt.setString(5, member.getMemberId());
+			int result = psmt.executeUpdate();
+			System.out.println(result+"개 수정완료");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 
 }
