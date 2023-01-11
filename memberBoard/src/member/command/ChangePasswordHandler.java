@@ -58,33 +58,35 @@ public class ChangePasswordHandler implements CommandHandler {
 			errors.put("newPwd", Boolean.TRUE);
 		}
 		
-		if(user.getmemberpwd().equals(newPwd)) {
-			errors.put("invalid", Boolean.TRUE);
-		}
-		
+		/*
+		 * if(user.getmemberpwd().equals(newPwd)) { errors.put("invalid", Boolean.TRUE);
+		 * }
+		 */
 		if(!errors.isEmpty()) {
 			return CHANGEPWD_VIEW;
 		}
 		
 		try {
 		changePwdService.changePassword(user.getMemberid(), oldPwd, newPwd);
-		return CHANGEPWDSUCCESS_VIEW;
+			return CHANGEPWDSUCCESS_VIEW;
 		
 		} catch(InvalidPasswordException e) {
+
 			errors.put("badoldPwd", Boolean.TRUE);
+			return CHANGEPWD_VIEW;
 		} catch(MemberNotFoundException e) {
 			try {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				return null;
 			}
-			return null;
 		}
-		
-		
-		
 		return null;
+		
+		
+		
+		
 	}
 
 	private String processForm(HttpServletRequest request, HttpServletResponse response) {

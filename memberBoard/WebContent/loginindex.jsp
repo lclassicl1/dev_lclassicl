@@ -26,8 +26,8 @@
 	<c:choose>
 		<c:when test="${authUser.grade==1}">기본(${authUser.grade})등급</c:when>
 		<c:when test="${authUser.grade==999 }">관리자(${authUser.grade})등급<br>
-						<a href="">회원관리</a><br/>
-						<a href="">게시판관리</a></c:when>
+						<a href="#">회원관리</a><br/>
+						<a href="#">게시판관리</a></c:when>
 	</c:choose>	</p>
 	<input type="button" value="logout" onclick="logout();"/>&nbsp;<a href="/changePwd.do">비밀번호변경하러 가기</a>
 	<div id="map" style="width:500px;height:400px;"></div>
