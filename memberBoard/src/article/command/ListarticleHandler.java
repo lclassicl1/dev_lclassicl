@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import article.model.Article;
+import article.service.ArticlePage;
 import article.service.ListArticleService;
 import mvc.command.CommandHandler;
 
@@ -30,18 +31,16 @@ public class ListarticleHandler implements CommandHandler {
 		
 		
 		String strsize = request.getParameter("rowSize");
+		int rSize = 3;
 		
-		if(strsize == null) {
-			size = 3;
-		} else {
-			size = Integer.parseInt(strsize);
+		if(strsize != null) {
+			rSize = Integer.parseInt(strsize);
 		}
 		
-		
 		//페이징 작업 추가 예정
-		List<Article> articlePage = listService.getArticlePage(size, pageNo);
-		System.out.println("게시글수:"+articlePage.size());
+		ArticlePage articlePage = listService.getArticlePage(rSize, pageNo);
 		request.setAttribute("articlePage", articlePage);
+		request.setAttribute("rSize",rSize);
 		
 		return LIST_VIEW;
 	}

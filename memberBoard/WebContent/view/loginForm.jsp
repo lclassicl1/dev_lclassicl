@@ -25,7 +25,7 @@ console.log(Kakao.isInitialized());
 
 
 function kakao() {
-	Kakao.Auth.login({
+	Kakao.Auth.authorize({
 	      success: function (response) {
 	        Kakao.API.request({
 	          url: 'view/loginForm.jsp',
