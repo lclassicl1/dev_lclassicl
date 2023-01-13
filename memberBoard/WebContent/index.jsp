@@ -25,6 +25,7 @@
 		<li><a href="<%=request.getContextPath()%>/registerForm.do">MY회원가입(폼)</a></li>
 		<li><a href="<%=request.getContextPath()%>/join.do">Join회원가입(폼)</a></li>
 		<li><a href="<%=request.getContextPath()%>/login.do">로그인</a></li>
+		<li><a href="<%=request.getContextPath()%>/article/list.do">목록보기</a>
 		
 	</ul>
 </body>
