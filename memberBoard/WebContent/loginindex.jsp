@@ -30,6 +30,7 @@
 						<a href="#">게시판관리</a></c:when>
 	</c:choose>	</p>
 	<input type="button" value="logout" onclick="logout();"/>&nbsp;<a href="/changePwd.do">비밀번호변경하러 가기</a>
+	<a href="/article/list.do">article글목록보기</a>
 	<div id="map" style="width:500px;height:400px;"></div>
 </body>
 </html>

@@ -49,36 +49,43 @@
 		</tr>
 		<tr>
 			<th>번호</th>
-			<th>제목</th>
 			<th>작성자</th>
+			<th>제목</th>
 			<th>작성일</th>
 			<th>마지막수정시간</th>
 			<th>조회수</th>
 		</tr>
 		</thead>
 		<tbody>
-			<%-- <c:if test="${articlePage.hasNoArticles()}">
+			<c:if test="${articlePage.hasNoArticles()}">
 				<tr>
 					<td colspan='5' style='text-align: center;'>게시글이 없습니다.</td>
 				</tr>
-			</c:if> --%>
+			</c:if>
 			<!-- 반복문 이용예정 -->
-			<c:forEach var='article' items='${articlePage}'>
+			<c:if test="${articlePage.hasArticles()}">
+			<c:forEach var='article' items='${articlePage.content}'>
 			<tr>
-				<td>${article.article_no }</td>
-				<td><a href="#">${article.title }</a></td>
-				<!-- 표면적으로필드명을 호출한거 같지만 get메소드를 호출하는것이며 get이 생략되고 앞의 대문자들을 소문자 처리해준다 -->
+				<td>${article.article_no}</td>
 				<td>${article.writer.name}</td>
+				<!-- 표면적으로필드명을 호출한거 같지만 get메소드를 호출하는것이며 get이 생략되고 앞의 대문자들을 소문자 처리해준다 -->
+				<td><a href="/article/read.do?no=${article.article_no}&pageNo=${articlePage.currentPage}&rowSize=${rSize}">${article.title}</a></td>
 				<td>
 				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${article.regdate}"></fmt:formatDate></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${article.moddate}"></fmt:formatDate></td>
-				<td>${article.read_cnt }</td>
+				<td>${article.read_cnt}</td>
 			</tr>
 			</c:forEach>
+			</c:if>
 			
 			<!-- paging 처리부분 -->
 			<tr>
-				<td colspan="6" style='text-align: center;'><a href="#">prev</a>1.2.3.4.5.6.6.<a href="#">next</a><td/>
+				<td colspan="6" style='text-align: center;'>
+				<c:if test="${articlePage.startPage > rsize}"><a href="list.do?pageNo=${article.startPage - 3}">[prev]</a></c:if>
+				<c:forEach var="pno" begin="${articlePage.startPage}" end="${articlePage.endPage}">
+				<a href="list.do?pageNo=${pno}&rowSize=${rSize}">[${pno}]</a>
+				<c:if test="${articlePage.endPage < articlePage.totalPages}"><a href="list.do?pageNo=${article.startPage + 3}">[NEXT]</a></c:if>
+				</c:forEach>
 			</tr>
 		</tbody>
 	</table>

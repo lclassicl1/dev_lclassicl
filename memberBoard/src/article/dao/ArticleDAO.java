@@ -26,10 +26,12 @@ public class ArticleDAO {
 		
 		sql.append("select article_no, writer_id, writer_name, title, regdate, moddate, read_cnt, isshow");
 		sql.append(" from article");
-		sql.append(" order by regdate desc limit 0,?");
+		sql.append(" where isshow='Y'");
+		sql.append(" order by regdate desc limit ?,?");
 		try {
 			psmt = conn.prepareStatement(sql.toString());
-			psmt.setInt(1, listSize);
+			psmt.setInt(1, pageNo);
+			psmt.setInt(2, listSize);
 			rs = psmt.executeQuery();
 			List<Article> list = new ArrayList<>();
 
@@ -67,6 +69,104 @@ public class ArticleDAO {
 	
 	private Date toDate(Timestamp timestamp) {
 		return new Date(timestamp.getTime());
+	}
+	
+	//전체 게시글수 조회하는 count 메서드
+	public int selectCount(Connection conn) throws SQLException {
+		StringBuffer sql = new StringBuffer();
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		sql.append("select count(article_no)");
+		sql.append(" from article");
+		sql.append(" where isshow='Y'");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt(1); //count 함수를 이용하였기때문에 count(article_no)는 존재하지않는컬럼, 따라서 인덱스 번호를 던진것
+			}
+			return 0;
+		}  finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(psmt);
+		}
+		
+	}
+	
+	//리턴유형 Article : article.model의 article의 정보를 담고 있다
+	public Article selectById(Connection conn, int no) throws SQLException { //int no는 상세조회할 글번호
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		StringBuffer sql = new StringBuffer();
+		Article article = null;
+		
+		sql.append("select article_no, writer_id, writer_name, title, regdate, moddate, read_cnt, isshow");
+		sql.append(" from  article");
+		sql.append(" where isshow='Y' and article_no = ?");
+		
+		try {
+			psmt = conn.prepareCall(sql.toString());
+			psmt.setInt(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				article = convertArticle(rs);
+			}
+			return article;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(psmt);
+		}
+	} //selectById의 끝
+	
+	
+	//조회수 증가
+	
+	public void increaseReadCount(Connection conn, int no) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("update article"); 
+		sql.append(" set read_cnt = read_cnt+1"); 
+		sql.append(" where article_no = ? and isshow='Y'");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setInt(1, no);
+			int result = psmt.executeUpdate();
+			if(result != 0) {
+				System.out.println(result+"행 조회수 증가 쿼리 실행 완료");
+			} else if(result == 0) {
+				System.out.println("조회수 증가 쿼리 실행 실패");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void update(Connection conn, int articleNumber, String title) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("update article");
+		sql.append(" set title=?, moddate = now()");
+		sql.append(" where article_no = ? and isshow='Y'");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, title);
+			psmt.setInt(2, articleNumber);
+			int result = psmt.executeUpdate();
+			System.out.println(result+"행 업데이트 완료");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}
 	
 }

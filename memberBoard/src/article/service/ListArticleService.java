@@ -13,11 +13,15 @@ public class ListArticleService {
 	
 	//pagNo 매개변수는 controller에서 넘어온 user가 선택한 Page번호
 	//목록조회 + 페이징처리 관련 메소드
-	public List<Article> getArticlePage(int size, int pageNo) {
+	public ArticlePage getArticlePage(int size, int pageNo) {
 		try {
 			Connection conn = ConnectionProvider.getConnection();
-			List<Article> list = articleDAO.select(conn, size, pageNo);
-			return list;
+			int total = articleDAO.selectCount(conn);
+			System.out.println("total의 수"+total);
+			
+			List<Article> list = articleDAO.select(conn, size, (pageNo -1)*size);
+			System.out.println("pageno:"+pageNo);
+			return new ArticlePage(total, pageNo, size, list);
 		
 		} catch(SQLException e) {
 			e.printStackTrace();

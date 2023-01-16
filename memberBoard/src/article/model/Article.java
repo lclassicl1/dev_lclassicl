@@ -44,5 +44,12 @@ public class Article {
 	public String getIsshow() {
 		return isshow;
 	}
+
+	@Override
+	public String toString() {
+		return "Article [article_no=" + article_no + ", writer=" + writer + ", title=" + title + ", regdate=" + regdate
+				+ ", moddate=" + moddate + ", read_cnt=" + read_cnt + ", isshow=" + isshow + "]";
+	}
+	
 	
 }
