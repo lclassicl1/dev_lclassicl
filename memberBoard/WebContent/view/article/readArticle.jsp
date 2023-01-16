@@ -28,7 +28,7 @@
 	<table border='1'>
 		<tr>
 			<th>번호</th>
-			<td>${articleData.articleContent.article_no}</td>
+			<td>${articleData.article.article_no}</td>
 		</tr>
 		<tr>
 			<th>작성자명</th>
@@ -44,14 +44,19 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td>${articleData.articleContent.content}</td>
+			<td>${articleData.articleContent}</td>
 		</tr>
 		<tr>
 			<td colspan='2' style='text-align: center;'>
-			<a href='/article/list.do?PageNo=${strPageno}&rowSize=${rowSize}'>목록보기</a> <!-- pageNo는 요청페이지 rowsize는 보여줄 게시글 갯수 -->
-			<a href='/article/modify.do?no=수정할글번호'>수정</a>
-			<a href='/article/deleteArticle.do?no=수정할글번호'>글삭제(delete용)</a>
-			<a href='/article/deleteArticle.do?no=삭제할글번호'>글삭제(update용)</a>
+			
+			<c:set var='pageNo' value='${empty param.pageNo?"1": param.pageNo}'></c:set>
+			<a href='/article/list.do?PageNo=${pageNo}&rowSize=${rowSize}'>목록보기</a> <!-- pageNo는 요청페이지 rowsize는 보여줄 게시글 갯수 -->
+			<!-- 수정과 삭제는 로그인한아이디와 작성자의 아이디가 일치해야만 나타나게 처리 -->
+			<c:if test="${authUser.memberid==articleData.article.writer.id}">
+			<a href='/article/modify.do?no=${articleData.article.article_no}&PageNo=${pageNo}&rowSize=${rowSize}'>수정</a>
+			<a href='/article/deleteArticle.do?no=${articleData.article.article_no}'>글삭제(delete용)</a>
+			<a href='/article/deleteArticle.do?no=${articleData.article.article_no}'>글삭제(update용)</a>
+			</c:if>
 			</td>
 		</tr>
 	</table>

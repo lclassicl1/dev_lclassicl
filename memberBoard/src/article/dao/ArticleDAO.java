@@ -121,4 +121,52 @@ public class ArticleDAO {
 		}
 	} //selectById의 끝
 	
+	
+	//조회수 증가
+	
+	public void increaseReadCount(Connection conn, int no) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append("update article"); 
+		sql.append(" set read_cnt = read_cnt+1"); 
+		sql.append(" where article_no = ? and isshow='Y'");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setInt(1, no);
+			int result = psmt.executeUpdate();
+			if(result != 0) {
+				System.out.println(result+"행 조회수 증가 쿼리 실행 완료");
+			} else if(result == 0) {
+				System.out.println("조회수 증가 쿼리 실행 실패");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void update(Connection conn, int articleNumber, String title) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("update article");
+		sql.append(" set title=?, moddate = now()");
+		sql.append(" where article_no = ? and isshow='Y'");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setString(1, title);
+			psmt.setInt(2, articleNumber);
+			int result = psmt.executeUpdate();
+			System.out.println(result+"행 업데이트 완료");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+	
 }

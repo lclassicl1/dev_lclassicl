@@ -14,8 +14,8 @@ public class ReadArticleService {
 	private ArticleContentDAO articleContentDAO = new ArticleContentDAO();
 	
 	//article Num = 글번호
-	//boolean은 조회수를 늘려주기 위한 매개변수
-	public ArticleData getAticle(int no) {
+	//boolean increaseReadCount는 조회수를 늘려주기 위한 매개변수
+	public ArticleData getAticle(int no,boolean increaseReadCount) {
 		try {
 			Connection conn = ConnectionProvider.getConnection();
 			Article article = articleDAO.selectById(conn, no);
@@ -34,6 +34,10 @@ public class ReadArticleService {
 			}
 			
 			//특정글 조회사 조회수 증가 관련 메서드 추가예정
+			if(increaseReadCount) {
+				articleDAO.increaseReadCount(conn, no);
+			}
+			
 			
 			return new ArticleData(article, content);
 		} catch (SQLException | ArticleNotFoundException | ArticleContentNotFoundException e) {

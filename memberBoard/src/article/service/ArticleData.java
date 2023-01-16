@@ -18,8 +18,8 @@ public class ArticleData {
 		return article;
 	}
 
-	public ArticleContent getArticleContent() {
-		return content;
+	public String getArticleContent() {
+		return content.getContent();
 	}
 
 	@Override

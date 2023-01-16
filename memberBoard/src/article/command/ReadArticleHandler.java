@@ -22,7 +22,7 @@ public class ReadArticleHandler implements CommandHandler {
 		int strPageNo = Integer.parseInt(request.getParameter("pageNo")); //현재 페이지번호
 		int rowsize = Integer.parseInt(request.getParameter("rowSize")); //페이지에 보여줄 글수?
 		
-		ArticleData articleData = readService.getAticle(no);
+		ArticleData articleData = readService.getAticle(no, true);
 		request.setAttribute("articleData", articleData);
 		request.setAttribute("strPageno", strPageNo);
 		request.setAttribute("rowSize", rowsize);
