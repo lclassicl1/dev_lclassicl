@@ -58,4 +58,23 @@ public class ArticleContentDAO {
 		
 		
 	}
+
+	public int deleteArticle(Connection conn, int no) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("delete"); 
+		sql.append(" from article_content"); 
+		sql.append(" where article_no = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setInt(1, no);
+			int result = psmt.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JdbcUtil.rollback(conn);
+			return 0;
+		}
+	}
 }

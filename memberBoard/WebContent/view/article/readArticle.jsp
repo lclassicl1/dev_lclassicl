@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri="/WEB-INF/tags" prefix="u" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -44,7 +45,7 @@
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td>${articleData.articleContent}</td>
+			<td><u:pre value="${articleData.articleContent}"/></td>
 		</tr>
 		<tr>
 			<td colspan='2' style='text-align: center;'>
@@ -55,7 +56,7 @@
 			<c:if test="${authUser.memberid==articleData.article.writer.id}">
 			<a href='/article/modify.do?no=${articleData.article.article_no}&PageNo=${pageNo}&rowSize=${rowSize}'>수정</a>
 			<a href='/article/deleteArticle.do?no=${articleData.article.article_no}'>글삭제(delete용)</a>
-			<a href='/article/deleteArticle.do?no=${articleData.article.article_no}'>글삭제(update용)</a>
+			<a href='/article/deleteArticle2.do?no=${articleData.article.article_no}'>글삭제(update용)</a>
 			</c:if>
 			</td>
 		</tr>
