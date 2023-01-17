@@ -168,5 +168,51 @@ public class ArticleDAO {
 		
 		
 	}
+	//삭제기능이지만 update를 이용
+	public int deleteArticle2(Connection conn, int no) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("update article"); 
+		sql.append(" set isshow='N'");
+		sql.append(" where article_no=?");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setInt(1, no);
+			int result = psmt.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("삭제(update)도중 실패");
+		} finally {
+			JdbcUtil.close(psmt);
+		}
+		return 0;
+				
+	}
+	
+	
+	//delete
+	public int deleteArticle(Connection conn, int no) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("delete"); 
+		sql.append(" from article"); 
+		sql.append(" where article_no =?");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setInt(1, no);
+			int result = psmt.executeUpdate();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("삭제(delete)도중 실패");
+		} finally {
+			JdbcUtil.close(psmt);
+		}
+		return 0;
+				
+	}
 	
 }
