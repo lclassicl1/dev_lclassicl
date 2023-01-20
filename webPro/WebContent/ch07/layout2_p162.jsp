@@ -19,15 +19,12 @@
 	</script>
 </head>
 <body>
-	<h1>입력 성공시 보이는 화면입니다</h1>
-	<!-- 세션정보 newArticleNo -->
-	newArticleNo정보:${newArticleNo}
-	rowSize=${rSize}
-	<a href="<%=request.getContextPath()%>/index.jsp">Home으로</a>
-	<a href='/article/list.do?&PageNo=1&rowSize=${rSize}'>목록보기</a>
-	<%-- <a href='/article/modify.do?no=${articleData.article.article_no}&PageNo=${pageNo}&rowSize=${rowSize}'>수정</a>
-	<a href='/article/deleteArticle.do?no=${articleData.article.article_no}'>글삭제(delete용)</a>
-	<a href='/article/read.do?no=${newArticleNo}&pageNo=${}&rowSize=${}'>상세보기</a> --%>
+	<!-- jsp: 표준태그 -->
+	<%-- <jsp:include page="포함시키고자 하는 Page"></jsp:include> --%>
+	<jsp:include page="module/top.jsp"></jsp:include>
 	<hr/>
+	<h2>layout2.jsp</h2>
+	<hr/>
+	<jsp:include page="module/bottom.jsp"></jsp:include>
 </body>
 </html>

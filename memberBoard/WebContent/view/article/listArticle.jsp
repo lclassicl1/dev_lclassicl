@@ -34,7 +34,7 @@
 	<table border="1">
 		<thead>
 		<tr>
-			<td colspan="6"><a href="write.do">게시글쓰러가기</a>&nbsp;<a href="<%=request.getContextPath()%>/index.jsp">Home으로</a>
+			<td colspan="6"><a href="/article/write.do?rowSize=${rSize}">게시글쓰러가기</a>&nbsp;<a href="<%=request.getContextPath()%>/index.jsp">Home으로</a>
 				<p>
 				<form action="/article/list.do" name="rowSizeFRM" id="rowSizeFRM" method="get">
 				<select name="rowSize" id="rowSize">

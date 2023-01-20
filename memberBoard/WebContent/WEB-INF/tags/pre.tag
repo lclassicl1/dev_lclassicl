@@ -3,11 +3,10 @@
 <%@ attribute name="value" type="java.lang.String" required="true" %>
 
 <%
-	value.replace("\n","\n<br/>");
-	value.replace("&","&amp;");
-	value.replace("<","&lt;");
-	value.replace(">","&gt;");
-
+	value = value.replace("\n","\n<br>");
+	value = value.replace("&","&amp;");
+	value = value.replace("<", "&lt;");
+	value = value.replace(" ", "&nbsp;");
 %>
 
 <%=value%>

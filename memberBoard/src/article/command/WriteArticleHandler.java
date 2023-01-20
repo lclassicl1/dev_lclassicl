@@ -6,12 +6,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import article.model.Writer;
+import article.service.WriteRequest;
 import auth.service.User;
+import auth.service.WriteArticleService;
 import mvc.command.CommandHandler;
 
 //쓰기 기능을 구현하고 쓰기 form을 보여주는 컨트롤러
 public class WriteArticleHandler implements CommandHandler {
 	private final static  String WRITE_VIEW = "/view/article/writeForm.jsp"; 
+	private WriteArticleService writeArticle = new WriteArticleService();
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,6 +24,7 @@ public class WriteArticleHandler implements CommandHandler {
 		
 		if(request.getMethod().equalsIgnoreCase("get")) {
 			System.out.println("get방식");
+			
 			return processForm(request, response); //메소드가 get으로 요청되면 쓰기 폼으로 이동시키는 method
 		} else if(request.getMethod().equalsIgnoreCase("post")) {
 			System.out.println("post방식");
@@ -38,7 +43,12 @@ public class WriteArticleHandler implements CommandHandler {
 	
 	private String processForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		User user = getUser(request);
+		String strSize = request.getParameter("rowSize");
+		System.out.println("rSize="+strSize);
+		int rSize = Integer.parseInt(strSize);
+		request.setAttribute("rSize", rSize);
 		request.setAttribute("authUser", user);
+		
 		return WRITE_VIEW;
 	}
 	
@@ -46,18 +56,33 @@ public class WriteArticleHandler implements CommandHandler {
 		User user = (User) request.getSession().getAttribute("authUser");
 		String title = request.getParameter("title"); //제목
 		String content = request.getParameter("content"); //내용
-		
+		int rowSize = Integer.parseInt(request.getParameter("rowSize")); //한페이지의 게시글수
 		Map<String, Boolean> errors = new HashMap<>();
 		request.setAttribute("errors", errors);
-		//writeReq.validate(errors);
+		WriteRequest writeReq = createWriteRequest(user, request);
+		writeReq.validate(errors);
 		
 		if(!errors.isEmpty()) {
-			return WRITE_VIEW;
+			return WRITE_VIEW; //여기서 view로 넘어갈때 map 방식의 errors내용이 담긴 세션도 같이 넘어간다
 		}
 		
+		int newArticleNo = writeArticle.write(writeReq);
+		request.setAttribute("newArticleNo", newArticleNo);
+		request.setAttribute("rSize", rowSize);
+		System.out.println("세션에 보내준 rowSize:"+rowSize);
 		
 		
 		return "/view/newArticleSuccess.jsp";
+	}
+	
+	//유효성검사
+	
+	//리턴유형 writeRequest는 로그인한 유저의 아이디와 이름(Writer)을 가지고 있고, 입력받은 title과 content를 가지고있다.
+	private WriteRequest createWriteRequest(User user, HttpServletRequest request) {
+		return new WriteRequest(
+					new Writer(user.getMemberid(),user.getMembername()),
+					request.getParameter("title"),
+					request.getParameter("content"));
 	}
 	
 	//로그인한 유저의 정보를 메소드화

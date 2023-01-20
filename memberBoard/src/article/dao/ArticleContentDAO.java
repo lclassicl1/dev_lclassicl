@@ -77,4 +77,35 @@ public class ArticleContentDAO {
 			return 0;
 		}
 	}
+	
+	//articleContent Table에 insert하는 쿼리
+	//content = user가 입력한 정보
+	public ArticleContent insert(Connection conn, ArticleContent content) {
+		PreparedStatement psmt = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into article_content(article_no, content)"); 
+		sql.append(" values(?,?)");
+		
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			psmt.setLong(1, content.getArticle_no());
+			psmt.setString(2, content.getContent());
+			int result = psmt.executeUpdate();
+			
+			if(result != 0) { //insert가 성공이 되었다면
+				System.out.println(result+"개의 내용이 Articlecontent에 저장되었습니다");
+				return content;
+			} else {
+				return null;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("articleContent의 insert 메서드 수행 실패");
+			return null;
+		} finally {
+			JdbcUtil.close(psmt);
+		}
+		
+	}
 }

@@ -12,7 +12,12 @@
   <meta name="keywords" content="article, javascript, board, webProject">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>게시글 수정</title>
-	<style></style>
+	<style>
+		.error {
+			color:red;
+			font-size:0.8em;
+		}
+	</style>
 	<script>
 		$(function(){
 			
@@ -22,11 +27,13 @@
 <body>
 	<!-- 넘어온객체이름 "modReq"안에는 로그인한 userid, 글번호, db에 저장되어있는 제목과 내용이 담겨있다 -->
 	process폼에서 받은내용:${authUser}
+	에러정보:${errors}
+	rowSize:${rSize}
 	<%-- 요청페이지:${strPageno}
 	1페이지당 게시글수:${rowSize} --%>
 	<h1>게시글 작성 Page</h1>
 	<h2><a href="<%=request.getContextPath()%>/index.jsp">HOME으로</a></h2>
-		<form name='modifyFRM' id='modifyFRM' action='/article/write.do' method='post'>
+		<form name='modifyFRM' id='modifyFRM' action='/article/write.do?rowSize=${rSize}' method='post'>
 				<%-- <input type='hidden' name='no' id='no' value='${modReq.articleNumber}'/> <!-- 히든속성 parameter를 넘기기위한 hidden 폼태그 안에만 있으면된다 --> --%>
 		<table border='1'>
 		
@@ -38,12 +45,13 @@
 			<th>제목</th>
 			<td>
 				<input type='text' name='title' id='title' placeholder="제목을입력해주세요"/>
+				<span class='error'><c:if test='${errors.title}'>제목을 입력하시죠?</c:if></span>
 			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea rows="30" cols="100" name='content' id='content' placeholder="내용을 입력해주세요"></textarea>
+				<textarea rows="30" cols="100" name='content' id='content' placeholder="내용을 입력해주세요"><c:if test='${errors.content}'>내용 필수입력 하시죠?</c:if></textarea>
 			</td>
 		</tr>
 		<tr>

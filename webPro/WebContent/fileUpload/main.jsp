@@ -10,7 +10,7 @@
   <meta name="description" content="memberboard web app">
   <meta name="keywords" content="article, javascript, board, webProject">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
+	<title>파일업로드 예제</title>
 	<style></style>
 	<script>
 		$(function(){
@@ -19,15 +19,12 @@
 	</script>
 </head>
 <body>
-	<h1>입력 성공시 보이는 화면입니다</h1>
-	<!-- 세션정보 newArticleNo -->
-	newArticleNo정보:${newArticleNo}
-	rowSize=${rSize}
-	<a href="<%=request.getContextPath()%>/index.jsp">Home으로</a>
-	<a href='/article/list.do?&PageNo=1&rowSize=${rSize}'>목록보기</a>
-	<%-- <a href='/article/modify.do?no=${articleData.article.article_no}&PageNo=${pageNo}&rowSize=${rowSize}'>수정</a>
-	<a href='/article/deleteArticle.do?no=${articleData.article.article_no}'>글삭제(delete용)</a>
-	<a href='/article/read.do?no=${newArticleNo}&pageNo=${}&rowSize=${}'>상세보기</a> --%>
-	<hr/>
+	<h1>파일업로드 Page</h1>
+	<!-- 파일업로드 form -->
+	<form action="result.jsp" method="post" enctype="multipart/form-data">
+	파일1:<input type="file" name='file1' id='file1'/>
+	<!-- 파일2:<input type="file" name='file2'/> -->
+	<input type='submit' value='전송'/>
+	</form>
 </body>
 </html>

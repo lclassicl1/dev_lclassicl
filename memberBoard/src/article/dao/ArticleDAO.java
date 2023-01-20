@@ -11,6 +11,7 @@ import java.util.List;
 
 import article.model.Article;
 import article.model.Writer;
+import article.service.WriteRequest;
 import jdbc.JdbcUtil;
 
 public class ArticleDAO {
@@ -213,6 +214,53 @@ public class ArticleDAO {
 		}
 		return 0;
 				
+	}
+	
+	//글쓰기
+	//writeReq는 로그인한 유저의 아이디와 이름(Writer)을 가지고 있고, 입력받은 title과 content를 가지고있다.
+	public Article insert(Connection conn, Article article) {
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into article(writer_id, writer_name, title, regdate, moddate, read_cnt, isshow)");
+		sql.append(" values(?,?,?,?,?,0,'Y')");
+		try {
+			psmt = conn.prepareStatement(sql.toString());
+			
+			//writeReq에 담겨있는내용들을 하나하나 대입해준다. id와 name은 writeReq안에 Write안에 있으니 두번 접근해서 꺼내야한다
+			psmt.setString(1, article.getWriter().getId());
+			psmt.setString(2, article.getWriter().getName());
+			psmt.setString(3, article.getTitle());
+			psmt.setTimestamp(4, toTimestamp(article.getRegdate()));
+			psmt.setTimestamp(5, toTimestamp(article.getModdate()));
+			int result = psmt.executeUpdate();
+			
+			if(result != 0) { //insert가 성공했을때
+				psmt = conn.prepareStatement("select last_insert_id() from article");
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					Integer newNum = rs.getInt(1);
+					return new Article(newNum, article.getWriter(), article.getTitle(), article.getRegdate(), article.getModdate(), 0,"Y");
+					
+				}
+			}
+			
+			System.out.println(result+"개 작성 완료");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(psmt);
+		}
+		return article;
+		
+		
+	}
+	
+	
+	private Timestamp toTimestamp(Date date) {
+		return new Timestamp(date.getTime());
 	}
 	
 }
