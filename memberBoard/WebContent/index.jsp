@@ -28,6 +28,7 @@
 		<li><a href="<%=request.getContextPath()%>/login.do">로그인</a></li>
 		<li><a href="<%=request.getContextPath()%>/article/list.do">목록보기</a>
 		<li><a href='<%=request.getContextPath()%>/article/write.do'>글쓰기</a></li>
+		<li><a href='<%=request.getContextPath()%>/getMemberInfoProc.do'>회원관리(특정회원조회)</a>
 		
 	</ul>
 </body>

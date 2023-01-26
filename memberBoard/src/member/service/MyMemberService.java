@@ -5,10 +5,12 @@ import java.sql.SQLException;
 
 import jdbc.conn.ConnectionProvider;
 import member.dao.MyMemberDAO;
+import member.model.Member;
 
 //이 클래스는 비즈니스 로직을 수행하는 Service 클래스
 //컨트롤러에서 DAO 가기전 단계에서 중간다리역활로 Controller -> service -> DAO -> DB
 public class MyMemberService {
+	private MyMemberDAO mmDao = new MyMemberDAO(); 
 	
 	
 	//method
@@ -26,10 +28,14 @@ public class MyMemberService {
 		}
 		 
 		//MyMemberDAO 객체 생성
-		 MyMemberDAO mDao = new MyMemberDAO(); 
-		 int result = mDao.idDuplicate(getId, conn); //Controller에서 넘겨받은 매개변수를 그대로 다시 전달
+		 int result = mmDao.idDuplicate(getId, conn); //Controller에서 넘겨받은 매개변수를 그대로 다시 전달
 		 
 		return result;
+	}
+	
+	public Member getMember(String id) throws SQLException {
+		Connection conn = ConnectionProvider.getConnection();
+		return mmDao.getMember(id, conn);
 	}
 	
 	/*

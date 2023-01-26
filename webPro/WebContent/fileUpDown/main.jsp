@@ -22,7 +22,9 @@
 	<h1>파일업로드 Page</h1>
 	<!-- 파일업로드 form -->
 	<form action="result.jsp" method="post" enctype="multipart/form-data">
+	이름:<input type='text' name='id	' id='id'/>
 	파일1:<input type="file" name='file1' id='file1'/>
+	파일2:<input type="file" name='file2' id='file2'/>
 	<!-- 파일2:<input type="file" name='file2'/> -->
 	<input type='submit' value='전송'/>
 	</form>
